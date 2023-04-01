@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# debug ngix server
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo mkdir /etc/nginx/conf.d
+sudo tee /etc/nginx/conf.d/listen-80.conf > /dev/null <<EOF
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+    root /var/www/html;
+    index index.html;
+}
+EOF
+sudo service nginx restart
